@@ -1,0 +1,155 @@
+\documentclass[11pt, UTF8]{ctexart}
+\usepackage{amsmath, amsfonts, amssymb} 
+\usepackage{geometry}                   
+\usepackage{xcolor}                     
+\usepackage{enumitem}                   
+\usepackage[most]{tcolorbox}            
+\usepackage{fancyhdr}                   
+\setlength{\headheight}{13.6pt}
+\geometry{a4paper, margin=0.8in}        
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\color{fblue} 3月19日作业 答案} 
+\rhead{\color{fblue} \today}
+\cfoot{\thepage}
+
+\definecolor{fblue}{RGB}{0, 74, 142}
+\definecolor{fred}{RGB}{204, 26, 26}
+
+\newtcolorbox{problem}[2]{
+    enhanced,
+    colback=white,
+    colframe=fblue!80,
+    arc=2mm,
+    boxrule=0.8pt,
+    before upper={\textbf{\color{fblue} 问题 #1 (#2).}\hspace{0.5em}},
+    before skip=1.5em,
+    after skip=1.5em,
+    left=3mm, right=3mm, top=2mm, bottom=2mm
+}
+
+\newcommand{\Prob}{P}
+\newcommand{\comp}[1]{\overline{#1}}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \bfseries \color{fblue} 3月19日作业 答案}
+\end{center}
+
+\begin{problem}{1}{1.18}
+某人忘记了电话号码的最后一个数字，因而他随意地拨号。求他拨号不超过三次而接通所需电话的概率；若已知最后一个数字是奇数，则此概率是多少？
+\end{problem}
+
+\paragraph{\color{fblue}解法 (i)}
+以 $A_i$ 表示事件“第 $i$ 次拨号接通电话”，$i=1,2,3$。以 $A$ 表示事件“拨号不超过三次接通电话”，则有
+\[ A = A_1 \cup \comp{A_1}A_2 \cup \comp{A_1}\comp{A_2}A_3. \]
+因 $A_1, \comp{A_1}A_2, \comp{A_1}\comp{A_2}A_3$ 两两互不相容，且 $\Prob(A_1) = \frac{1}{10}$，
+\begin{align*}
+    \Prob(\comp{A_1}A_2) &= \Prob(A_2 | \comp{A_1})\Prob(\comp{A_1}) = \frac{1}{9} \times \frac{9}{10} = \frac{1}{10}, \\
+    \Prob(\comp{A_1}\comp{A_2}A_3) &= \Prob(A_3 | \comp{A_1}\comp{A_2})\Prob(\comp{A_2} | \comp{A_1})\Prob(\comp{A_1}) = \frac{1}{8} \times \frac{8}{9} \times \frac{9}{10} = \frac{1}{10},
+\end{align*}
+即有
+\begin{align*}
+    \Prob(A) &= \Prob(A_1) + \Prob(\comp{A_1}A_2) + \Prob(\comp{A_1}\comp{A_2}A_3) \\
+             &= \frac{1}{10} + \frac{1}{10} + \frac{1}{10} = {\color{fred}\mathbf{\frac{3}{10}}}.
+\end{align*}
+当已知最后一位数是奇数时，所求概率为
+\[ p = \frac{1}{5} + \frac{1}{5} + \frac{1}{5} = \mathbf{\color{fred}\frac{3}{5}}. \]
+\paragraph{\color{fblue}解法 (ii)}
+沿用解法 (i) 的记号，知
+\begin{align*}
+    \Prob(A) &= 1 - \Prob\{\text{拨号三次都接不通}\} = 1 - \Prob(\comp{A_1}\comp{A_2}\comp{A_3}) \\
+             &= 1 - \Prob(\comp{A_3} | \comp{A_1}\comp{A_2})\Prob(\comp{A_2} | \comp{A_1})\Prob(\comp{A_1}) \\
+             &= 1 - \frac{7}{8} \times \frac{8}{9} \times \frac{9}{10} = \mathbf{\color{fred}\frac{3}{10}}.
+\end{align*}
+当已知最后一位是奇数时，所求概率为
+\[ p = 1 - \frac{2}{3} \times \frac{3}{4} \times \frac{4}{5} = \mathbf{\color{fred}\frac{3}{5}}. \]
+
+\begin{problem}{2}{1.19}
+(1) 设甲袋中装有 $n$ 只白球、$m$ 只红球，乙袋中装有 $N$ 只白球、$M$ 只红球. 今从甲袋中任意取一只球放入乙袋中，再从乙袋中任意取一只球. 问取到白球的概率是多少？\\
+(2) 第一只盒子装有 5 只红球、4 只白球，第二只盒子装有 4 只红球、5 只白球. 先从第一盒中任取 2 只球放入第二盒中去，然后从第二盒中任取一只球. 求取到白球的概率.
+\end{problem}
+
+\paragraph{\color{fblue}解法 (i)}
+(1) $E$: 从甲袋任取一球放入乙袋（此为试验 $E_1$），再从乙袋任取一球观察其颜色（此为试验 $E_2$）。试验 $E$ 是由 $E_1$ 和 $E_2$ 合成的。以 $R$ 表示事件“从甲袋取得的是红球”，以 $W$ 表示事件“从乙袋取得的是白球”，即有
+\[ W = SW = (R \cup \comp{R})W = RW \cup \comp{R}W, \quad (RW)(\comp{R}W) = \varnothing. \]
+于是
+\[ \Prob(W) = \Prob(RW) + \Prob(\comp{R}W) = \Prob(W|R)\Prob(R) + \Prob(W|\comp{R})\Prob(\comp{R}). \]
+而 
+$$\Prob(R) = \frac{m}{n+m}, \Prob(\comp{R}) = \frac{n}{n+m}.$$
+在计算 $\Prob(W|R), \Prob(W|\comp{R})$ 时，注意在试验 $E_2$ 中，乙袋球数为 $N+M+1$ 只；在求 $\Prob(W|R)$ 时，乙袋白球数为 $N$，但在求 $\Prob(W|\comp{R})$ 时，乙袋白球数为 $N+1$，故
+\begin{align*}
+    \Prob(W) &= \frac{N}{N+M+1} \frac{m}{n+m} + \frac{N+1}{N+M+1} \frac{n}{n+m} \\
+        &= \mathbf{\color{fred}\frac{n+N(n+m)}{(n+m)(N+M+1)}}.
+\end{align*}
+
+(2) $E$: 从第一盒中任取 2 只球放入第二盒 ($E_1$)，再从第二盒任取一球观察其颜色 ($E_2$)。以 $R_i (i=0,1,2)$ 表示事件“从第一盒中取得的球中有 $i$ 只是红球”，以 $W$ 表示事件“从第二盒取得一球是白球”。由于 $R_0, R_1, R_2$ 两两互不相容，且 $R_0 \cup R_1 \cup R_2 = S$，故
+\[ W = SW = (R_0 \cup R_1 \cup R_2)W = R_0W \cup R_1W \cup R_2W. \]
+从而
+\begin{align*}
+        \Prob(W) &= \Prob(R_0W) + \Prob(R_1W) + \Prob(R_2W) \\
+        &= \Prob(W|R_0)\Prob(R_0) + \Prob(W|R_1)\Prob(R_1) + \Prob(W|R_2)\Prob(R_2).
+\end{align*}
+而
+\begin{align*}
+        \Prob(R_0) = \binom{4}{2} \Big/ \binom{9}{2} = \frac{1}{6}, \quad \Prob(R_2) = \binom{5}{2} \Big/ \binom{9}{2} = \frac{5}{18},\\
+        \Prob(R_1) = 1 - \Prob(R_0) - \Prob(R_2) = 1 - \frac{1}{6} - \frac{5}{18} = \frac{10}{18}.
+\end{align*}
+并注意到，在试验 $E_2$ 中第二盒球的个数为 11，故
+\[ \Prob(W|R_0) = \frac{7}{11}, \quad \Prob(W|R_1) = \frac{6}{11}, \quad \Prob(W|R_2) = \frac{5}{11}, \]
+所以
+\[ \Prob(W) = \frac{7}{11} \times \frac{1}{6} + \frac{6}{11} \times \frac{10}{18} + \frac{5}{11} \times \frac{5}{18} = \mathbf{\color{fred}\frac{53}{99}}. \]
+
+\paragraph{\color{fblue}解法 (ii)}
+(1) 以 $A$ 表示事件“最后取到的是白球”，以 $B$ 表示事件“最后取到的是甲袋中的球”，因
+\[ A = SA = (B \cup \comp{B})A = BA \cup \comp{B}A, \quad (BA)(\comp{B}A) = \varnothing, \]
+于是
+\[ \Prob(A) = \Prob(BA) + \Prob(\comp{B}A) = \Prob(A|B)\Prob(B) + \Prob(A|\comp{B})\Prob(\comp{B}). \]
+而 
+$$\Prob(B) = \frac{1}{N+M+1}, \Prob(\comp{B}) = \frac{N+M}{N+M+1}$$
+(这是因为最后是从乙袋中取球的，此时乙袋中共有 $N+M+1$ 只球，其中只有一只球是甲袋中的球）。又有 
+$$\Prob(A|B) = \frac{n}{n+m}, \Prob(A|\comp{B}) = \frac{N}{M+N},$$
+故
+\begin{align*}
+    \Prob(A) &= \frac{n}{n+m} \frac{1}{N+M+1} + \frac{N}{N+M} \frac{N+M}{N+M+1} \\
+             &= \mathbf{\color{fred}\frac{n+N(n+m)}{(n+m)(N+M+1)}}.
+\end{align*}
+
+(2) 以 $A$ 表示事件“最后取到的是白球”，以 $B$ 表示事件“最后取到的是第一盒中的球”，因
+\[ A = SA = (B \cup \comp{B})A = BA \cup \comp{B}A, \quad (BA)(\comp{B}A) = \varnothing, \]
+得
+\[ \Prob(A) = \Prob(A|B)\Prob(B) + \Prob(A|\comp{B})\Prob(\comp{B}) = \frac{4}{9} \times \frac{2}{11} + \frac{5}{9} \times \frac{9}{11} = \mathbf{\color{fred}\frac{53}{99}}. \]
+
+\vspace{1.5em}
+
+\begin{problem}{1}{1.22}
+一学生接连参加同一课程的两次考试. 第一次及格的概率为 $p$, 若第一次及格则第二次及格的概率也为 $p$; 若第一次不及格则第二次及格的概率为 $p/2$.
+\begin{enumerate}
+    \item[(1)] 若至少有一次及格则他能取得某种资格, 求他取得该资格的概率. 
+    \item[(2)] 若已知他第二次已经及格, 求他第一次及格的概率.
+\end{enumerate}
+\end{problem}
+
+\paragraph{\color{fblue}解}
+$E$: 一学生接连参加一门课程的两次考试. 以 $A_i$ 表示事件“第 $i$ 次考试及格”, $i=1,2$; 以 $A$ 表示“他能取得该种资格”. \\
+(1) 按题意 $A = A_1 \cup \comp{A_1} A_2$. 因 $A_1 \cap (\comp{A_1} A_2) = \varnothing$, 且由已知条件:
+\[ \Prob(A_1) = p, \quad \Prob(\comp{A_1}) = 1-p, \]
+\[ \Prob(A_2 | A_1) = p, \quad \Prob(A_2 | \comp{A_1}) = \frac{p}{2}, \]
+故
+\begin{align*}
+    \Prob(A) &= \Prob(A_1 \cup \comp{A_1} A_2) = \Prob(A_1) + \Prob(\comp{A_1} A_2) \\
+             &= p + \Prob(A_2 | \comp{A_1})\Prob(\comp{A_1}) = p + \frac{p}{2}(1-p) \\
+             &= \mathbf{\color{fred}{\frac{3}{2}p - \frac{1}{2}p^2}}.
+\end{align*}
+
+(2)
+\begin{align*}
+    \Prob(A_1 | A_2) &= \frac{\Prob(A_1 A_2)}{\Prob(A_2)} \\
+                     &= \frac{\Prob(A_2 | A_1)\Prob(A_1)}{\Prob(A_2 | A_1)\Prob(A_1) + \Prob(A_2 | \comp{A_1})\Prob(\comp{A_1})} \\
+                     &= \frac{p \cdot p}{p \cdot p + \frac{p}{2}(1-p)} = \mathbf{\color{fred}\frac{2p}{p+1}}.
+\end{align*}
+
+\vspace{1.5em}
+
+\end{document}
