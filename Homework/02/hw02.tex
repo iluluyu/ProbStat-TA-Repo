@@ -9,7 +9,7 @@
 \geometry{a4paper, margin=0.8in}        
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\color{fblue} 3月19日作业 答案} 
+\lhead{\color{fblue} \hwdate 作业 答案} 
 \rhead{\color{fblue} \today}
 \cfoot{\thepage}
 
@@ -28,13 +28,15 @@
     left=3mm, right=3mm, top=2mm, bottom=2mm
 }
 
+\newcommand{\hwdate}{3月19日}
 \newcommand{\Prob}{P}
 \newcommand{\comp}[1]{\overline{#1}\mskip 3mu}
+\newcommand{\ans}[1]{\mathbf{\color{fred}#1}}
 
 \begin{document}
 
 \begin{center}
-    {\LARGE \bfseries \color{fblue} 3月19日作业 答案}
+    {\LARGE \bfseries \color{fblue} \hwdate 作业 答案}
 \end{center}
 
 \begin{problem}{1}{1.18}
@@ -52,19 +54,19 @@
 即有
 \begin{align*}
     \Prob(A) &= \Prob(A_1) + \Prob(\comp{A_1}A_2) + \Prob(\comp{A_1}\comp{A_2}A_3) \\
-             &= \frac{1}{10} + \frac{1}{10} + \frac{1}{10} = {\color{fred}\mathbf{\frac{3}{10}}}.
+             &= \frac{1}{10} + \frac{1}{10} + \frac{1}{10} = \ans{\frac{3}{10}}.
 \end{align*}
 当已知最后一位数是奇数时，所求概率为
-\[ p = \frac{1}{5} + \frac{1}{5} + \frac{1}{5} = \mathbf{\color{fred}\frac{3}{5}}. \]
+\[ p = \frac{1}{5} + \frac{1}{5} + \frac{1}{5} = \ans{\frac{3}{5}}. \]
 \paragraph{\color{fblue}解法 (ii)}
 沿用解法 (i) 的记号，知
 \begin{align*}
     \Prob(A) &= 1 - \Prob\{\text{拨号三次都接不通}\} = 1 - \Prob(\comp{A_1}\comp{A_2}\comp{A_3}) \\
              &= 1 - \Prob(\comp{A_3} | \comp{A_1}\comp{A_2})\Prob(\comp{A_2} | \comp{A_1})\Prob(\comp{A_1}) \\
-             &= 1 - \frac{7}{8} \times \frac{8}{9} \times \frac{9}{10} = \mathbf{\color{fred}\frac{3}{10}}.
+             &= 1 - \frac{7}{8} \times \frac{8}{9} \times \frac{9}{10} = \ans{\frac{3}{10}}.
 \end{align*}
 当已知最后一位是奇数时，所求概率为
-\[ p = 1 - \frac{2}{3} \times \frac{3}{4} \times \frac{4}{5} = \mathbf{\color{fred}\frac{3}{5}}. \]
+\[ p = 1 - \frac{2}{3} \times \frac{3}{4} \times \frac{4}{5} = \ans{\frac{3}{5}}. \]
 
 \begin{problem}{2}{1.19}
 (1) 设甲袋中装有 $n$ 只白球、$m$ 只红球，乙袋中装有 $N$ 只白球、$M$ 只红球. 今从甲袋中任意取一只球放入乙袋中，再从乙袋中任意取一只球. 问取到白球的概率是多少？\\
@@ -81,7 +83,7 @@ $$\Prob(R) = \frac{m}{n+m}, \Prob(\comp{R}) = \frac{n}{n+m}.$$
 在计算 $\Prob(W|R), \Prob(W|\comp{R})$ 时，注意在试验 $E_2$ 中，乙袋球数为 $N+M+1$ 只；在求 $\Prob(W|R)$ 时，乙袋白球数为 $N$，但在求 $\Prob(W|\comp{R})$ 时，乙袋白球数为 $N+1$，故
 \begin{align*}
     \Prob(W) &= \frac{N}{N+M+1} \frac{m}{n+m} + \frac{N+1}{N+M+1} \frac{n}{n+m} \\
-        &= \mathbf{\color{fred}\frac{n+N(n+m)}{(n+m)(N+M+1)}}.
+        &= \ans{\frac{n+N(n+m)}{(n+m)(N+M+1)}}.
 \end{align*}
 
 (2) $E$: 从第一盒中任取 2 只球放入第二盒 ($E_1$)，再从第二盒任取一球观察其颜色 ($E_2$)。以 $R_i (i=0,1,2)$ 表示事件“从第一盒中取得的球中有 $i$ 只是红球”，以 $W$ 表示事件“从第二盒取得一球是白球”。由于 $R_0, R_1, R_2$ 两两互不相容，且 $R_0 \cup R_1 \cup R_2 = S$，故
@@ -99,7 +101,7 @@ $$\Prob(R) = \frac{m}{n+m}, \Prob(\comp{R}) = \frac{n}{n+m}.$$
 并注意到，在试验 $E_2$ 中第二盒球的个数为 11，故
 \[ \Prob(W|R_0) = \frac{7}{11}, \quad \Prob(W|R_1) = \frac{6}{11}, \quad \Prob(W|R_2) = \frac{5}{11}, \]
 所以
-\[ \Prob(W) = \frac{7}{11} \times \frac{1}{6} + \frac{6}{11} \times \frac{10}{18} + \frac{5}{11} \times \frac{5}{18} = \mathbf{\color{fred}\frac{53}{99}}. \]
+\[ \Prob(W) = \frac{7}{11} \times \frac{1}{6} + \frac{6}{11} \times \frac{10}{18} + \frac{5}{11} \times \frac{5}{18} = \ans{\frac{53}{99}}. \]
 
 \paragraph{\color{fblue}解法 (ii)}
 (1) 以 $A$ 表示事件“最后取到的是白球”，以 $B$ 表示事件“最后取到的是甲袋中的球”，因
@@ -113,13 +115,13 @@ $$\Prob(A|B) = \frac{n}{n+m}, \Prob(A|\comp{B}) = \frac{N}{M+N},$$
 故
 \begin{align*}
     \Prob(A) &= \frac{n}{n+m} \frac{1}{N+M+1} + \frac{N}{N+M} \frac{N+M}{N+M+1} \\
-             &= \mathbf{\color{fred}\frac{n+N(n+m)}{(n+m)(N+M+1)}}.
+             &= \ans{\frac{n+N(n+m)}{(n+m)(N+M+1)}}.
 \end{align*}
 
 (2) 以 $A$ 表示事件“最后取到的是白球”，以 $B$ 表示事件“最后取到的是第一盒中的球”，因
 \[ A = SA = (B \cup \comp{B})A = BA \cup \comp{B}A, \quad (BA)(\comp{B}A) = \varnothing, \]
 得
-\[ \Prob(A) = \Prob(A|B)\Prob(B) + \Prob(A|\comp{B})\Prob(\comp{B}) = \frac{4}{9} \times \frac{2}{11} + \frac{5}{9} \times \frac{9}{11} = \mathbf{\color{fred}\frac{53}{99}}. \]
+\[ \Prob(A) = \Prob(A|B)\Prob(B) + \Prob(A|\comp{B})\Prob(\comp{B}) = \frac{4}{9} \times \frac{2}{11} + \frac{5}{9} \times \frac{9}{11} = \ans{\frac{53}{99}}. \]
 
 \vspace{1.5em}
 
@@ -140,14 +142,14 @@ $E$: 一学生接连参加一门课程的两次考试. 以 $A_i$ 表示事件“
 \begin{align*}
     \Prob(A) &= \Prob(A_1 \cup \comp{A_1} A_2) = \Prob(A_1) + \Prob(\comp{A_1} A_2) \\
              &= p + \Prob(A_2 | \comp{A_1})\Prob(\comp{A_1}) = p + \frac{p}{2}(1-p) \\
-             &= \mathbf{\color{fred}{\frac{3}{2}p - \frac{1}{2}p^2}}.
+             &= \ans{{\frac{3}{2}p - \frac{1}{2}p^2}}.
 \end{align*}
 
 (2)
 \begin{align*}
     \Prob(A_1 | A_2) &= \frac{\Prob(A_1 A_2)}{\Prob(A_2)} \\
                      &= \frac{\Prob(A_2 | A_1)\Prob(A_1)}{\Prob(A_2 | A_1)\Prob(A_1) + \Prob(A_2 | \comp{A_1})\Prob(\comp{A_1})} \\
-                     &= \frac{p \cdot p}{p \cdot p + \frac{p}{2}(1-p)} = \mathbf{\color{fred}\frac{2p}{p+1}}.
+                     &= \frac{p \cdot p}{p \cdot p + \frac{p}{2}(1-p)} = \ans{\frac{2p}{p+1}}.
 \end{align*}
 
 \vspace{1.5em}
