@@ -1,0 +1,210 @@
+\documentclass[11pt, UTF8]{ctexart}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{extarrows} 
+\usepackage{geometry} 
+\usepackage{xcolor} 
+\usepackage{enumitem} 
+\usepackage[most]{tcolorbox} 
+\usepackage{fancyhdr} 
+\usepackage{diagbox} % 用于绘制表格的斜线表头
+\usepackage{tikz}    % 用于绘制概率密度积分区域图
+\setlength{\headheight}{13.6pt}
+\geometry{a4paper, margin=0.8in} 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\color{fblue} \hwdate 作业 答案} 
+\rhead{\color{fblue} \today}
+\cfoot{\thepage}
+
+\definecolor{fblue}{RGB}{0, 74, 142}
+\definecolor{fred}{RGB}{204, 26, 26}
+
+\newtcolorbox{problem}[2]{
+    enhanced,
+    colback=white,
+    colframe=fblue!80,
+    arc=2mm,
+    boxrule=0.8pt,
+    before upper={\textbf{\color{fblue} 问题 #1 (#2)}\hspace{0.5em}},
+    before skip=1.5em,
+    after skip=1.5em,
+    left=3mm, right=3mm, top=2mm, bottom=2mm
+}
+
+\newcommand{\hwdate}{4月2日}
+\newcommand{\Prob}{P}
+\newcommand{\comp}[1]{\overline{#1}\mskip 3mu}
+\newcommand{\ans}[1]{\mathbf{\color{fred}#1}}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \bfseries \color{fblue} \hwdate 作业 答案}
+\end{center}
+
+% ---------------- 题目 1 ----------------
+\begin{problem}{1}{3.2}
+(1) 盒子里装有 3 只黑球、2 只红球、2 只白球，在其中任取 4 只球. 以 $X$ 表示取到黑球的只数，以 $Y$ 表示取到红球的只数. 求 $X$ 和 $Y$ 的联合分布律. \\
+(2) 在 (1) 中求 $P\{X > Y\}, P\{Y = 2X\}, P\{X + Y = 3\}, P\{X < 3 - Y\}$.
+\end{problem}
+
+\paragraph{\color{fblue}解} 
+（1）按古典概型计算. 自 7 只球中取 4 只，共有 $\binom{7}{4} = 35$ 种取法. 在 4 只球中，黑球有 $i$ 只，红球有 $j$ 只（剩下 $4 - i - j$ 只为白球）的取法数为
+\[ N\{X = i, Y = j\} = \binom{3}{i}\binom{2}{j}\binom{2}{4 - i - j}, \]
+\[ i = 0,\, 1,\, 2,\, 3; \qquad j = 0,\, 1,\, 2; \qquad i + j \leqslant 4. \]
+于是
+\begin{align*}
+    P\{X = 0, Y = 2\} &= \binom{3}{0}\binom{2}{2}\binom{2}{2}/35 = \frac{1}{35}. \\
+    P\{X = 1, Y = 1\} &= \binom{3}{1}\binom{2}{1}\binom{2}{2}/35 = \frac{6}{35}. \\
+    P\{X = 1, Y = 2\} &= \binom{3}{1}\binom{2}{2}\binom{2}{1}/35 = \frac{6}{35}. \\
+    P\{X = 2, Y = 0\} &= \binom{3}{2}\binom{2}{0}\binom{2}{2}/35 = \frac{3}{35}. \\
+    P\{X = 2, Y = 1\} &= \binom{3}{2}\binom{2}{1}\binom{2}{1}/35 = \frac{12}{35}. \\
+    P\{X = 2, Y = 2\} &= \binom{3}{2}\binom{2}{2}\binom{2}{0}/35 = \frac{3}{35}. \\
+    P\{X = 3, Y = 0\} &= \binom{3}{3}\binom{2}{0}\binom{2}{1}/35 = \frac{2}{35}. \\
+    P\{X = 3, Y = 1\} &= \binom{3}{3}\binom{2}{1}\binom{2}{0}/35 = \frac{2}{35}.
+\end{align*}
+\[ P\{X = 0, Y = 0\} = P\{X = 0, Y = 1\} = P\{X = 1, Y = 0\} = P\{X = 3, Y = 2\} = 0. \]
+分布律为
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\setlength{\tabcolsep}{20pt}
+\begin{tabular}{c|cccc}
+\hline
+\diagbox{$Y$}{$X$} & $\displaystyle 0$ & $\displaystyle 1$ & $\displaystyle 2$ & $\displaystyle 3$ \\
+\hline
+$\displaystyle 0$ & $\displaystyle 0$ & $\displaystyle 0$ & $\displaystyle \frac{3}{35}$ & $\displaystyle \frac{2}{35}$ \\
+$\displaystyle 1$ & $\displaystyle 0$ & $\displaystyle \frac{6}{35}$ & $\displaystyle \frac{12}{35}$ & $\displaystyle \frac{2}{35}$ \\
+$\displaystyle 2$ & $\displaystyle \frac{1}{35}$ & $\displaystyle \frac{6}{35}$ & $\displaystyle \frac{3}{35}$ & $\displaystyle 0$ \\
+\hline
+
+\end{tabular}
+\end{center}
+
+（2）
+\begin{align*}
+P\{X > Y\} &= P\{X = 2, Y = 0\} + P\{X = 2, Y = 1\} \\
+&\quad + P\{X = 3, Y = 0\} + P\{X = 3, Y = 1\} \\
+&= \frac{3}{35} + \frac{12}{35} + \frac{2}{35} + \frac{2}{35} = \ans{\frac{19}{35}}. \\[1ex]
+P\{Y = 2X\} &= P\{X = 1, Y = 2\} = \ans{\frac{6}{35}}. \\[1ex]
+P\{X + Y = 3\} &= P\{X = 1, Y = 2\} + P\{X = 2, Y = 1\} + P\{X = 3, Y = 0\} \\
+&= \frac{6}{35} + \frac{12}{35} + \frac{2}{35} = \ans{\frac{20}{35}} = \ans{\frac{4}{7}}. \\[1ex]
+P\{X < 3 - Y\} &= P\{X + Y < 3\} \\
+&= P\{X = 0, Y = 2\} + P\{X = 1, Y = 1\} + P\{X = 2, Y = 0\} \\
+&= \frac{1}{35} + \frac{6}{35} + \frac{3}{35} = \ans{\frac{10}{35}} = \ans{\frac{2}{7}}.
+\end{align*}
+
+\vspace{1.5em}
+
+% ---------------- 题目 2 ----------------
+\begin{problem}{2}{3.3}
+设随机变量 $(X, Y)$ 的概率密度为
+\[ f(x, y) = \begin{cases} k(6 - x - y), & 0 < x < 2, 2 < y < 4, \\ 0, & \text{其他.} \end{cases} \]
+(1) 确定常数 $k$. \\
+(2) 求 $P\{X < 1, Y < 3\}$. \\
+(3) 求 $P\{X < 1.5\}$. \\
+(4) 求 $P\{X + Y \leqslant 4\}$.
+\end{problem}
+
+\paragraph{\color{fblue}解}
+（1）由 $\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} f(x, y)\mathrm{d}x\mathrm{d}y = 1$，得
+\begin{align*}
+1 &= \int_{2}^{4} \mathrm{d}y \int_{0}^{2} k(6 - x - y)\mathrm{d}x = k \int_{2}^{4} \left[ (6 - y)x - \frac{1}{2}x^2 \right]\Big|_{x=0}^{x=2} \mathrm{d}y \\
+&= k \int_{2}^{4} (12 - 2y - 2)\mathrm{d}y = k(10y - y^2)\Big|_{2}^{4} = 8k,
+\end{align*}
+所以 $k = \ans{1/8}$.
+
+（2）
+\begin{align*}
+P\{X < 1, Y < 3\} &= \int_{2}^{3} \mathrm{d}y \int_{0}^{1} \frac{1}{8}(6 - x - y)\mathrm{d}x \\
+&= \frac{1}{8} \int_{2}^{3} \left[ (6 - y)x - \frac{1}{2}x^2 \right]\Big|_{x=0}^{x=1} \mathrm{d}y \\
+&= \frac{1}{8} \int_{2}^{3} \left( \frac{11}{2} - y \right)\mathrm{d}y = \ans{\frac{3}{8}}.
+\end{align*}
+
+（3）
+\begin{align*}
+P\{X < 1.5\} &= \int_{2}^{4} \mathrm{d}y \int_{0}^{1.5} \frac{1}{8}(6 - x - y)\mathrm{d}x \\
+&= \frac{1}{8} \int_{2}^{4} \left[ (6 - y)x - \frac{1}{2}x^2 \right]\Big|_{x=0}^{x=1.5} \mathrm{d}y \\
+&= \frac{1}{8} \int_{2}^{4} \left( \frac{63}{8} - \frac{3}{2}y \right)\mathrm{d}y = \ans{\frac{27}{32}}.
+\end{align*}
+
+（4）在 $f(x, y) \neq 0$ 的区域 $R: 0 \leqslant x \leqslant 2, 2 \leqslant y \leqslant 4$ 上作直线 $x + y = 4$（如题 3.3 图），并记 $G: \{(x, y) \mid 0 \leqslant x \leqslant 2, 2 \leqslant y \leqslant 4 - x\}$，则
+
+\noindent
+\begin{minipage}{0.68\textwidth}
+\begin{align*}
+P\{X + Y \leqslant 4\} &= P\{(X, Y) \in G\} \\
+&= \iint_{G} f(x, y)\mathrm{d}x\mathrm{d}y \\
+&= \int_{2}^{4} \mathrm{d}y \int_{0}^{4-y} \frac{1}{8}(6 - x - y)\mathrm{d}x \\
+&= \frac{1}{8} \int_{2}^{4} \left[ (6 - y)x - \frac{1}{2}x^2 \right]\Big|_{x=0}^{x=4-y} \mathrm{d}y \\
+&= \frac{1}{8} \int_{2}^{4} \left[ (6 - y)(4 - y) - \frac{1}{2}(4 - y)^2 \right]\mathrm{d}y \\
+&= \frac{1}{8} \int_{2}^{4} \left[ 2(4 - y) + \frac{1}{2}(4 - y)^2 \right]\mathrm{d}y \\
+&= \frac{1}{8} \left[ -(4 - y)^2 - \frac{1}{6}(4 - y)^3 \right]\Big|_{2}^{4} = \ans{\frac{2}{3}}.
+\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.28\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.65, >=stealth]
+\draw[->] (-0.5,0) -- (4.8,0) node[below] {$x$};
+\draw[->] (0,-0.5) -- (0,4.8) node[left] {$y$};
+\node[below left] at (0,0) {$O$};
+\draw (2,0) -- (2,4);
+\draw (0,2) -- (2,2);
+\draw (0,4) -- (4,0);
+\fill[black] (0,2) -- (2,2) -- (0,4) -- cycle;
+\node[below] at (2,0) {$2$};
+\node[below] at (4,0) {$4$};
+\node[left] at (0,2) {$2$};
+\node[left] at (0,4) {$4$};
+\node[below] at (2,-1) {题 3.3 图};
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{1.5em}
+
+% ---------------- 题目 3 ----------------
+\begin{problem}{3}{3.7}
+设二维随机变量 $(X, Y)$ 的概率密度为
+\[ f(x, y) = \begin{cases} 4.8y(2 - x), & 0 \leqslant x \leqslant 1, 0 \leqslant y \leqslant x, \\ 0, & \text{其他.} \end{cases} \]
+求边缘概率密度.
+\end{problem}
+
+\paragraph{\color{fblue}解}
+$(X, Y)$ 的概率密度 $f(x, y)$ 在区域 $G: \{(x, y) \mid 0 \leqslant x \leqslant 1, 0 \leqslant y \leqslant x\}$ 外取零值. 如题 3.7 图有
+
+\noindent
+\begin{minipage}{0.65\textwidth}
+\begin{align*}
+f_X(x) &= \int_{-\infty}^{\infty} f(x, y)\mathrm{d}y \\
+&= \begin{cases} \int_{0}^{x} 4.8y(2 - x)\mathrm{d}y, & 0 \leqslant x \leqslant 1, \\ 0, & \text{其他} \end{cases} \\
+&= \begin{cases} \ans{2.4(2 - x)x^2,} & \ans{0 \leqslant x \leqslant 1,} \\ 0, & \text{其他.} \end{cases}
+\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\textwidth}
+\centering
+\begin{tikzpicture}[scale=2, >=stealth]
+\draw[->] (-0.2,0) -- (1.4,0) node[below] {$x$};
+\draw[->] (0,-0.2) -- (0,1.4) node[left] {$y$};
+\node[below left] at (0,0) {$O$};
+\draw (0,0) -- (1.2,1.2) node[above left] {$y=x$};
+\fill[black] (0,0) -- (1,0) -- (1,1) -- cycle;
+\draw (1,0) -- (1,1);
+\node[below] at (1,0) {$1$};
+\node[below] at (0.5,-0.3) {题 3.7 图};
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{0.5em}
+
+\begin{align*}
+f_Y(y) &= \int_{-\infty}^{\infty} f(x, y)\mathrm{d}x \\
+&= \begin{cases} \int_{y}^{1} 4.8y(2 - x)\mathrm{d}x, & 0 \leqslant y \leqslant 1, \\ 0, & \text{其他} \end{cases} \\
+&= \begin{cases} \ans{2.4y(3 - 4y + y^2),} & \ans{0 \leqslant y \leqslant 1,} \\ 0, & \text{其他.} \end{cases}
+\\
+&= \begin{cases} \ans{2.4y(y-1)(y-3),} & \ans{0 \leqslant y \leqslant 1,} \\ 0, & \text{其他.} \end{cases}
+\end{align*}
+
+\textbf{注：}在求边缘概率密度时，需画出 $(X, Y)$ 的概率密度 $f(x, y) \neq 0$ 的区域，这对于正确写出所要求的积分的上下限是很有帮助的.
+
+\end{document}
