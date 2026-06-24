@@ -1,0 +1,128 @@
+\documentclass[11pt, UTF8]{ctexart}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{extarrows} 
+\usepackage{geometry} 
+\usepackage{xcolor} 
+\usepackage{enumitem} 
+\usepackage[most]{tcolorbox} 
+\usepackage{fancyhdr} 
+\usepackage{diagbox} 
+\usepackage{tikz}    
+\setlength{\headheight}{13.6pt}
+\geometry{a4paper, margin=0.8in} 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\color{fblue} \hwdate 作业} 
+\rhead{\color{fblue} \today}
+\cfoot{\thepage}
+
+\definecolor{fblue}{RGB}{0, 74, 142}
+\definecolor{fred}{RGB}{204, 26, 26}
+
+\newtcolorbox{problem}[2]{
+    enhanced,
+    colback=white,
+    colframe=fblue!80,
+    arc=2mm,
+    boxrule=0.8pt,
+    before upper={\textbf{\color{fblue} 问题 #1 (#2)}\hspace{0.5em}},
+    before skip=1.5em,
+    after skip=1.5em,
+    left=3mm, right=3mm, top=2mm, bottom=2mm
+}
+
+\newcommand{\hwdate}{5月28日} 
+\newcommand{\Prob}{P}
+\newcommand{\comp}[1]{\overline{#1}\mskip 3mu}
+\newcommand{\ans}[1]{\mathbf{\color{fred}#1}}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \bfseries \color{fblue} \hwdate 作业}
+\end{center}
+
+% ---------------- 题目 1 ----------------
+\begin{problem}{1}{4. 4}
+(1) 设样本 $X_1, X_2, \cdots, X_6$ 来自总体 $N(0,1)$, $Y = (X_1+X_2+X_3)^2 + (X_4+X_5+X_6)^2$, 试确定常数 $C$ 使 $CY$ 服从 $\chi^2$ 分布.
+
+(2) 设样本 $X_1, X_2, \cdots, X_5$ 来自总体 $N(0,1)$, $Y = C(X_1+X_2)/{(X_3^2+X_4^2+X_5^2)^{1/2}}$, 试确定常数 $C$ 使 $Y$ 服从 $t$ 分布.
+
+(3) 已知总体 $X \sim t(n)$, 求证 $X^2 \sim F(1,n)$.
+\end{problem}
+
+\paragraph{\color{fblue}解} 
+(1) 因 $X_1, X_2, \cdots, X_6$ 是总体 $N(0,1)$ 的样本，故
+\[ X_1+X_2+X_3 \sim N(0,3), \quad X_4+X_5+X_6 \sim N(0,3), \]
+且两者相互独立. 因此
+\[ \frac{X_1+X_2+X_3}{\sqrt{3}} \sim N(0,1), \quad \frac{X_4+X_5+X_6}{\sqrt{3}} \sim N(0,1), \]
+且两者相互独立. 按 $\chi^2$ 分布的定义
+\[ \frac{(X_1+X_2+X_3)^2}{3} + \frac{(X_4+X_5+X_6)^2}{3} \sim \chi^2(2), \]
+即 $\frac{1}{3}Y \sim \chi^2(2)$, 即知 $\ans{C = 1 / 3}$.
+
+(2) 因 $X_1, X_2, \cdots, X_5$ 是总体 $N(0,1)$ 的样本，故 $X_1+X_2 \sim N(0,2)$, 即有
+\[ \frac{X_1+X_2}{\sqrt{2}} \sim N(0,1). \]
+而
+\[ X_3^2+X_4^2+X_5^2 \sim \chi^2(3). \]
+且 $({X_1+X_2})/{\sqrt{2}}$ 与 $X_3^2+X_4^2+X_5^2$ 相互独立，于是
+\[ \frac{(X_1+X_2)/\sqrt{2}}{\sqrt{(X_3^2+X_4^2+X_5^2)/3}} = \sqrt{\frac{3}{2}} \frac{X_1+X_2}{(X_3^2+X_4^2+X_5^2)^{1/2}} \sim t(3), \]
+因此所求的常数 $\ans{C = \sqrt{3 / 2}}$.
+
+(3) 按定义总体 $X \sim t(n)$, 故 $X$ 可表示成
+\[ X = \frac{Z}{\sqrt{Y/n}}, \]
+其中，$Y \sim \chi^2(n), Z \sim N(0,1)$ 且 $Z$ 与 $Y$ 相互独立，从而
+\[ X^2 = \frac{Z^2}{Y/n}. \]
+由于 $Z \sim N(0,1), Z^2 \sim \chi^2(1)$, 上式右端分子 $Z^2 \sim \chi^2(1)$, 分母中 $Y \sim \chi^2(n)$, 又由 $Z$ 与 $Y$ 相互独立，知 $Z^2$ 与 $Y$ 相互独立. 按 $F$ 分布的定义得
+\[ X^2 \sim F(1,n). \]
+
+\vspace{1.5em}
+
+% ---------------- 题目 2 ----------------
+\begin{problem}{2}{4. 6}
+设总体 $X \sim b(1,p), X_1, X_2, \cdots, X_n$ 是来自 $X$ 的样本.
+
+(1) 求 $(X_1, X_2, \cdots, X_n)$ 的分布律.
+
+(2) 求 $\sum\limits_{i=1}^n X_i$ 的分布律.
+
+(3) 求 $E(\overline{X}), D(\overline{X}), E(S^2)$.
+\end{problem}
+
+\paragraph{\color{fblue}解}
+(1) 因 $X_1, X_2, \cdots, X_n$ 相互独立，且有 $X_i \sim b(1,p), i=1,2,\cdots,n$, 即 $X_i$ 具有分布律 $P\{X_i=x_i\} = p^{x_i}(1-p)^{1-x_i}, x_i=0,1$, 因此 $(X_1, X_2, \cdots, X_n)$ 的分布律为
+\begin{align*}
+P\{X_1=x_1, X_2=x_2, \cdots, X_n=x_n\} &= \prod_{i=1}^n P\{X_i=x_i\} = \prod_{i=1}^n \left[p^{x_i}(1-p)^{1-x_i}\right] \\
+&= \ans{p^{\sum_{i=1}^n x_i} (1-p)^{n-\sum_{i=1}^n x_i}}.
+\end{align*}
+
+(2) 因 $X_1, X_2, \cdots, X_n$ 相互独立，且有 $X_i \sim b(1,p), i=1,2,\cdots,n$, 故 $\sum\limits_{i=1}^n X_i \sim b(n,p)$, 其分布律为
+\[ P\left\{\sum_{i=1}^n X_i = k\right\} = \ans{\binom{n}{k} p^k (1-p)^{n-k}}, \quad k=0,1,2,\cdots,n. \]
+
+(3) 由于总体 $X \sim b(1,p), E(X)=p, D(X)=p(1-p)$, 故有
+\[ \ans{E(\overline{X}) = p}, \quad \ans{D(\overline{X}) = \frac{p(1-p)}{n}}, \quad \ans{E(S^2) = D(X) = p(1-p)}. \]
+
+\vspace{1.5em}
+
+% ---------------- 题目 3 ----------------
+\begin{problem}{3}{4. 9}
+设在总体 $N(\mu,\sigma^2)$ 中抽得一容量为 $16$ 的样本，这里 $\mu,\sigma^2$ 均未知.
+
+(1) 求 $P\{S^2/\sigma^2 \leqslant 2.041\}$, 其中 $S^2$ 为样本方差.
+
+(2) 求 $D(S^2)$.
+\end{problem}
+
+\paragraph{\color{fblue}解}
+(1) 因为 $(n-1)S^2 / \sigma^2 \sim \chi^2(n-1)$, 现在 $n=16$, 即有 $15S^2/\sigma^2 \sim \chi^2(15)$, 故有
+\begin{align*}
+p &= P\{S^2/\sigma^2 \leqslant 2.041\} = P\{15S^2/\sigma^2 \leqslant 15 \times 2.041\} \\
+  &= P\{15S^2/\sigma^2 \leqslant 30.615\} = 1 - P\{15S^2/\sigma^2 > 30.615\}.
+\end{align*}
+查 $\chi^2$ 分布表得 $\chi_{0.01}^2(15) = 30.577$, 从而知 $\ans{p = 1 - 0.01 = 0.99}$.
+
+(2) 由 $15S^2/\sigma^2 \sim \chi^2(15)$, 得
+\[ D(15S^2/\sigma^2) = 2 \times 15 = 30, \]
+即
+\[ \frac{15^2}{\sigma^4}D(S^2) = 30, \quad \ans{D(S^2) = \frac{2\sigma^4}{15}}. \]
+
+\end{document}

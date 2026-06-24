@@ -1,0 +1,96 @@
+\documentclass[11pt, UTF8]{ctexart}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{extarrows} 
+\usepackage{geometry} 
+\usepackage{xcolor} 
+\usepackage{enumitem} 
+\usepackage[most]{tcolorbox} 
+\usepackage{fancyhdr} 
+\usepackage{diagbox} 
+\usepackage{tikz}    
+\setlength{\headheight}{13.6pt}
+\geometry{a4paper, margin=0.8in} 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\color{fblue} \hwdate 作业} 
+\rhead{\color{fblue} \today}
+\cfoot{\thepage}
+
+\definecolor{fblue}{RGB}{0, 74, 142}
+\definecolor{fred}{RGB}{204, 26, 26}
+
+\newtcolorbox{problem}[2]{
+    enhanced,
+    colback=white,
+    colframe=fblue!80,
+    arc=2mm,
+    boxrule=0.8pt,
+    before upper={\textbf{\color{fblue} 问题 #1 (#2)}\hspace{0.5em}},
+    before skip=1.5em,
+    after skip=1.5em,
+    left=3mm, right=3mm, top=2mm, bottom=2mm
+}
+
+\newcommand{\hwdate}{6月11日} 
+\newcommand{\Prob}{P}
+\newcommand{\comp}[1]{\overline{#1}\mskip 3mu}
+\newcommand{\ans}[1]{\mathbf{\color{fred}#1}}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \bfseries \color{fblue} \hwdate 作业}
+\end{center}
+
+% ---------------- 题目 1 ----------------
+\begin{problem}{1}{8. 6}
+下表分别给出两位文学家马克$\cdot$吐温(Mark Twain)的 8 篇小品文以及斯诺特格拉斯(Snodgrass)的 10 篇小品文中由 3 个字母组成的单词的比例：
+
+\begin{center}
+\begin{tabular}{c|cccccccccc}
+马克$\cdot$吐温 & 0.225 & 0.262 & 0.217 & 0.240 & 0.230 & 0.229 & 0.235 & 0.217 & & \\
+\hline
+斯诺特格拉斯 & 0.209 & 0.205 & 0.196 & 0.210 & 0.202 & 0.207 & 0.224 & 0.223 & 0.220 & 0.201
+\end{tabular}
+\end{center}
+
+设两组数据分别来自正态总体, 且两总体方差相等, 但参数均未知. 两样本相互独立. 问两位作家所写的小品文中包含由 3 个字母组成的单词的比例是否有显著的差异(取 $\alpha=0.05$)?
+\end{problem}
+
+\paragraph{\color{fblue}解} 
+按题意总体 $X \sim N(\mu_1, \sigma_1^2), Y \sim N(\mu_2, \sigma_2^2)$, 两总体的方差相等, 均等于 $\sigma^2$, $\sigma^2$ 未知, 两样本相互独立, 本题需在显著性水平 $\alpha=0.05$ 下检验假设
+\[ H_0: \mu_1 = \mu_2, \quad H_1: \mu_1 \neq \mu_2. \]
+采用 $t$ 检验, 取检验统计量为 $t = \frac{\overline{X} - \overline{Y} - \delta}{S_w\sqrt{1/n_1 + 1/n_2}}$, 今 $n_1 = 8, n_2 = 10, \overline{x} = 0.231\,9, \overline{y} = 0.209\,7, s_1^2 = 0.014\,6^2, s_2^2 = 0.009\,7^2$, 
+\[ s_w^2 = \frac{(8-1)s_1^2 + (10-1)s_2^2}{8+10-2} = 0.012^2, \]
+$\delta=0, t_{0.025}(16)=2.119\,9$. 拒绝域为
+\[ |t| = \left| \frac{\overline{x} - \overline{y}}{s_w\sqrt{1/n_1 + 1/n_2}} \right| \geqslant t_{\alpha/2}(n_1+n_2-2) = 2.119\,9. \]
+因观察值
+\[ |t| = \left| \frac{0.231\,9 - 0.209\,7}{0.012\sqrt{1/8 + 1/10}} \right| = \ans{3.900 > 2.119\,9}, \]
+落在拒绝域之内, 故拒绝 $H_0$, 认为两位作家所写的小品文中包含由 3 个字母组成的单词的比例有显著的差异.
+
+\vspace{1.5em}
+
+% ---------------- 题目 2 ----------------
+\begin{problem}{2}{8. 15}
+在第 6 题中分别记两个总体的方差为 $\sigma_1^2$ 和 $\sigma_2^2$. 试检验假设(取 $\alpha=0.05$)
+\[ H_0: \sigma_1^2 = \sigma_2^2, \quad H_1: \sigma_1^2 \neq \sigma_2^2, \]
+以说明在第 6 题中我们假设 $\sigma_1^2 = \sigma_2^2$ 是合理的.
+\end{problem}
+
+\paragraph{\color{fblue}解} 
+本题为第 6 题的两总体方差的检验问题, 即要求在显著性水平 $\alpha=0.05$ 下, 检验假设
+\[ H_0: \sigma_1^2 = \sigma_2^2, \quad H_1: \sigma_1^2 \neq \sigma_2^2. \]
+采用 $F$ 检验, 取检验统计量为 $F = S_1^2 / S_2^2$. 今 $n_1 = 8, n_2 = 10, s_1^2 = 0.014\,6^2, s_2^2 = 0.009\,7^2, \alpha = 0.05$, 
+\[ F_{\alpha/2}(n_1-1, n_2-1) = F_{0.025}(7,9) = 4.20, \]
+\[ F_{1-\alpha/2}(n_1-1, n_2-1) = 1/F_{\alpha/2}(n_2-1, n_1-1) = 1/F_{0.025}(9,7) = 1/4.82 = 0.207. \]
+拒绝域为
+\[ F = s_1^2/s_2^2 \geqslant F_{\alpha/2}(n_1-1, n_2-1) = 4.20, \]
+或
+\[ F = s_1^2/s_2^2 \leqslant F_{1-\alpha/2}(n_1-1, n_2-1) = 0.207. \]
+今 $F$ 的观察值为 $F = 0.014\,6^2 / 0.009\,7^2 = 2.27$, 因 $\ans{0.207 < 2.27 < 4.20}$, 不落在拒绝域中, 故在显著性水平 $\alpha=0.05$ 下接受 $H_0: \sigma_1^2 = \sigma_2^2$, 认为两总体方差相等.
+
+注: 在采用 $F$ 检验法检验双边假设 $H_0: \sigma_1^2 = \sigma_2^2, H_1: \sigma_1^2 \neq \sigma_2^2$ 时, 接受域为
+\[ F_{1-\alpha/2}(n_1-1, n_2-1) < s_1^2/s_2^2 < F_{\alpha/2}(n_1-1, n_2-1). \]
+易犯的错误是, 将接受域误写成 $s_1^2/s_2^2 < F_{\alpha/2}(n_1-1, n_2-1)$, 或误写成 $s_1^2/s_2^2 > F_{1-\alpha/2}(n_1-1, n_2-1)$.
+
+\end{document}
